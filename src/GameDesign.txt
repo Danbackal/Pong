@@ -1,0 +1,33 @@
+Just an extra file to plan out some game design
+
+Game Class:
+	Has player object, to update it? Since game has ball. and that way game can update display
+	Has Ball object
+	Has computer?
+	has decorations which dont matter
+	Calls things like move player paddle, reset paddles (scored point), keeps track of score
+	Pause screen? Can reset game, or just allow for a break
+	Stores playable area, for collisions
+
+Player Class:
+	Stores paddle object
+	Moves paddle object, and keeps track of where it needs to be reset to
+	holds logic for collision block of paddle, and will need to communicate with the ball
+		some sort of logic about the angle of attack? Ball hits center of paddle going 45 degrees, should bounce at
+		equal angle, but if the paddle is moving, it adds speed in that direction
+		Also keep in mind, if it hits the corner of the paddle, it changes things harsher
+		Maybe paddle has some sort of chamfer - will need a texture for that, or to create a
+		conglomerate shape - a rectanlge, with an invisible triangle in each corner for corner collisions
+
+Computer Class:
+	Same as player, except maybe paddle moves automatically towards the ball at, idk, 1/3 speed?
+	This would mean the paddle should catch up to any relatively horizontal hit, but struggle with the
+	quick angular hits. Will likely need to tweak this, maybe eventually add a difficulty toggle?
+
+Main Function:
+	Sets up game. Shows Intro screen:
+		just a start button for now, maybe difficulty settings later?
+		Two player option? just using WS and ^... wait is there not a down arrow symbol? regardless, that
+		Maybe a way to set the game score? First to 5, 10, 15, 20, 25...
+	Runs window and event loop
+	Runs keyboard checks
