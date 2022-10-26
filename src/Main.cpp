@@ -1,5 +1,6 @@
 #include "Platform/Platform.hpp"
-#include "Game.cpp"
+#include "Game.h"
+#include "Player.h"
 
 int main()
 {
@@ -21,6 +22,11 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				game.Update(0);
+			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				game.Update(1);
+			}
 		game.DisplayGame();
 	}
 
