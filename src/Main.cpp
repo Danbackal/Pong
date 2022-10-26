@@ -1,6 +1,8 @@
 #include "Platform/Platform.hpp"
 #include "Game.h"
 #include "Player.h"
+#include "Ball.h"
+#include "GameDef.h"
 
 int main()
 {
@@ -22,11 +24,15 @@ int main()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				game.Update(0);
-			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				game.Update(1);
-			}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+			game.Update(CHAR_P);
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+			game.Update(CHAR_UP);
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+			game.Update(CHAR_DOWN);
+		} else {
+			game.Update(0);
+		}
 		game.DisplayGame();
 	}
 

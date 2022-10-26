@@ -1,13 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "GameDef.h"
+
 class Player {
 	private:
-		int windowWidth;
-		int windowHeight;
-		sf::RectangleShape paddle;
-		int paddleResetX;
-		int paddleResetY;
+		int _windowWidth;
+		int _windowHeight;
+		sf::RectangleShape _paddle;
+		int _paddleResetX;
+		int _paddleResetY;
 		void PaddleReset();
 
 	public:
