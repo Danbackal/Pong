@@ -11,9 +11,10 @@ Game::Game(sf::RenderWindow* w) {
 	_topBar.setPosition(0, _windowHeight/10-_windowHeight/100);
 	_net = sf::RectangleShape(sf::Vector2f(_windowWidth/256, _windowHeight-_windowHeight/10));
 	_net.setPosition(_windowWidth/2-_windowWidth/512, _windowHeight/10);
-	_player = Player(_windowWidth, _windowHeight, _upperBound);
+	_player = Player(_windowWidth, _windowHeight, _upperBound, true);
 	_ball = Ball(_windowWidth, _windowHeight, _upperBound);
 	_ballSize = _ball.GetBallSize();
+	_leftPaddle = _player.SetPaddleCoord();
 }
 
 void Game::DisplayGame() {
@@ -50,12 +51,12 @@ void Game::Update(int input) {
 		case MOVE:
 			switch (input) {
 				case CHAR_UP:
-					if (_player.getPosition().x >= _upperBound) {
+					if (_player.GetPosition().x >= _upperBound) {
 						_player.Move(-1);
 					}
 					break;
 				case CHAR_DOWN:
-					if (_player.getPosition().y <= _windowHeight) {
+					if (_player.GetPosition().y <= _windowHeight) {
 						_player.Move(1);
 					}
 					break;
@@ -92,5 +93,26 @@ void Game::CheckCollision() {
 		_gameState = RESET;
 		//scores
 	}
-	// not yet doing paddle collisions
+	// lets start by simple collision with paddle - no matter what, just reversed horizontal direction
+	// will have to check left and right side of ball seperately? dont want ball to clip through paddle then turn around?
+	// maybe focus on half of circle
+
+	// player paddle:
+	// too complicated, lets make this a private function
+	if (PaddleCollision(ballPos)) {
+		_ball.Move(PADDLE_COLLISION);
+	}
+	// if (((ballPos.x <= _leftPaddle) && (ballPos.x + _ballSize/2 >= _leftPaddle))
+	// 	|| ((ballPos.x >= _rightPaddle) && (ballPos.x + _ballSize/2 <= _rightPaddle))) {
+	// 	_ball.Move(PADDLE_COLLISION);
+	// }
+}
+
+bool Game::PaddleCollision(sf::Vector2f ballPos) {
+	if ((ballPos.x <= _leftPaddle) && (ballPos.x + _ballSize >= _leftPaddle)) {
+		if ((ballPos.y < _player.GetPosition().y) && (ballPos.y + _ballSize > _player.GetPosition().x)) {
+			return true;
+		}
+	}
+	return false;
 }

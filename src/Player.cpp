@@ -4,8 +4,9 @@
 Player::Player() {
 }
 
-Player::Player(int x, int y, int upperBound) {
+Player::Player(int x, int y, int upperBound, bool playerOne) {
 	// Might eventually need to know if it's player 1 or player 2
+	_playerOne = playerOne;
 	_windowWidth = x;
 	_windowHeight = y - upperBound;
 	_paddle = sf::RectangleShape(sf::Vector2f(x/128, y/9));
@@ -30,6 +31,14 @@ void Player::Move(float move) {
 	}
 }
 
-sf::Vector2f Player::getPosition() {
+sf::Vector2f Player::GetPosition() {
 	return sf::Vector2f(_paddle.getPosition().y, _paddle.getPosition().y+_paddle.getSize().y);
+}
+
+int Player::SetPaddleCoord() {
+	if (_playerOne) {
+		return _paddle.getSize().x + _paddle.getPosition().x;
+	} else {
+		return _paddle.getPosition().x;
+	}
 }

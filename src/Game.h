@@ -17,6 +17,8 @@ class Game {
 		sf::RectangleShape _net;
 		// Players
 		Player _player;
+		int _leftPaddle;
+		int _rightPaddle;
 		// Computer _computer;
 		int _p1Score; // p1 is left, always a real player
 		int _p2Score;
@@ -26,6 +28,7 @@ class Game {
 		// Gamestate
 		int _gameState;
 		void CheckCollision();
+		bool PaddleCollision(sf::Vector2f ballPos);
 
 	public:
 		Game();

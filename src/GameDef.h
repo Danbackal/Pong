@@ -19,6 +19,7 @@
 #define MAX_SCORE 25
 #define WALL_COLLISION 20 // top and bottom, need something for goals
 #define NO_COLLISION 21
+#define PADDLE_COLLISION 22
 #define MOVE_SPEED 20
 // wil figure out paddle collision math later
 

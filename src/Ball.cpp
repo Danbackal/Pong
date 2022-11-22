@@ -21,12 +21,13 @@ void Ball::BallReset() {
 void Ball::Serve() {
 	std::cout << "ball is served" << std:: endl;
 	// ratio of ball to paddle speed is up to 7/4 according to an online source?
-	float x = std::rand() % 7 + 1;
+	// changing this because fast is too fast and slow is too slow
+	float x = std::rand() % 5 + 3;
 	float y = std::rand() % 8;
 	int up = std::rand() % 2;
 	int left = std::rand() % 2;
-	_xVelocity = (x * ((-2*left) + 1)) / (4 * MOVE_SPEED);
-	_yVelocity = (y * ((-2*up) + 1)) / (4 * MOVE_SPEED);
+	_xVelocity = (x * ((-2*left) + 1)) / (5 * MOVE_SPEED);
+	_yVelocity = (y * ((-2*up) + 1)) / (5 * MOVE_SPEED);
 	std::cout << "balls speed is " << _xVelocity << "," << _yVelocity << std::endl;
 }
 
@@ -40,6 +41,10 @@ void Ball::Move(int collision) {
 			break;
 		case NO_COLLISION:
 			_ball.move(_xVelocity, _yVelocity);
+			break;
+		case PADDLE_COLLISION:
+			_xVelocity = _xVelocity * -1;
+			std::cout << "Paddle Collision" << std::endl;
 			break;
 		default:
 			break;
