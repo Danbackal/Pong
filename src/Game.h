@@ -24,6 +24,13 @@ class Game {
 		Computer _computer;
 		int _p1Score; // p1 is left, always a real player
 		int _p2Score;
+		sf::Font _font;
+		sf::Text _p1Text;
+		sf::Text _p2Text;
+		void SetScores();
+		// will need to set positioning depending on text box because numbers are all different sizes, need this stored
+		int _textY;
+		int _p1TextX; // dont need p2 x, as it goes left to right
 		// Ball
 		Ball _ball;
 		int _ballSize;
@@ -31,6 +38,7 @@ class Game {
 		int _gameState;
 		void CheckCollision();
 		bool PaddleCollision(sf::Vector2f ballPos);
+		void SetUpBoundaries(sf::RenderWindow* w);
 
 	public:
 		Game();

@@ -1,5 +1,20 @@
 Just an extra file to plan out some game design
 
+11/22/2022 UPDATE:
+Game is in a good position. Computer is a little strong.
+Need to add:
+	Start screen:
+		1 or 2 players?
+		Computer difficulty?
+	End screen:
+		Who won?
+		Play again?
+		Should play again lead back to start screen?
+	Paddle bounds:
+		Hitting the ball while moving should change the velocity.
+		This will stop the computer from always getting points or always losing points depending on the initial serve
+
+
 Game Class:
 	Has player object, to update it? Since game has ball. and that way game can update display
 	Has Ball object
