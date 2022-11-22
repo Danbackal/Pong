@@ -110,6 +110,10 @@ bool Game::PaddleCollision(sf::Vector2f ballPos) {
 		if ((ballPos.y < _player.GetPosition().y) && (ballPos.y + _ballSize > _player.GetPosition().x)) {
 			return true;
 		}
+	} else if ((ballPos.x + _ballSize >= _rightPaddle) && (ballPos.x <= _rightPaddle)) {
+		if ((ballPos.y < _computer.GetPosition().y) && (ballPos.y + _ballSize > _computer.GetPosition().x)) {
+			return true;
+		}
 	}
 	return false;
 }
