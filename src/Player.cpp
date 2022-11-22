@@ -9,8 +9,13 @@ Player::Player(int x, int y, int upperBound, bool playerOne) {
 	_playerOne = playerOne;
 	_windowWidth = x;
 	_windowHeight = y - upperBound;
+	_upperBound = upperBound;
 	_paddle = sf::RectangleShape(sf::Vector2f(x/128, y/9));
-	_paddleResetX = x/10;
+	if (playerOne) {
+		_paddleResetX = x/10 - x/256;
+	} else {
+		_paddleResetX = (9*x)/10 - x/256;
+	}
 	_paddleResetY = y/2 - y/18 + upperBound;
 	PaddleReset();
 }

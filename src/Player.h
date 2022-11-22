@@ -4,9 +4,10 @@
 #include "GameDef.h"
 
 class Player {
-	private:
+	protected:
 		int _windowWidth;
 		int _windowHeight;
+		int _upperBound;
 		sf::RectangleShape _paddle;
 		int _paddleResetX;
 		int _paddleResetY;
@@ -17,7 +18,7 @@ class Player {
 		Player();
 		Player(int x, int y, int upperBound, bool playerOne);
 		sf::RectangleShape* GetPaddle();
-		void Move(float move);
+		virtual void Move(float move);
 		sf::Vector2f GetPosition();
 		int SetPaddleCoord();
 };

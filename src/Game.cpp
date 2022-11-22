@@ -12,9 +12,11 @@ Game::Game(sf::RenderWindow* w) {
 	_net = sf::RectangleShape(sf::Vector2f(_windowWidth/256, _windowHeight-_windowHeight/10));
 	_net.setPosition(_windowWidth/2-_windowWidth/512, _windowHeight/10);
 	_player = Player(_windowWidth, _windowHeight, _upperBound, true);
+	_computer = Computer(_windowWidth, _windowHeight, _upperBound, false);
 	_ball = Ball(_windowWidth, _windowHeight, _upperBound);
 	_ballSize = _ball.GetBallSize();
 	_leftPaddle = _player.SetPaddleCoord();
+	_rightPaddle = _computer.SetPaddleCoord();
 }
 
 void Game::DisplayGame() {
@@ -22,6 +24,7 @@ void Game::DisplayGame() {
 	_window->draw(_topBar);
 	_window->draw(_net);
 	_window->draw(*_player.GetPaddle());
+	_window->draw(*_computer.GetPaddle());
 	_window->draw(*_ball.GetBall());
 
 	_window->display();
@@ -32,6 +35,7 @@ void Game::Update(int input) {
 		case NEW_GAME:
 			// In case the last game ended and a new one began
 			_player.Move(RESET);
+			_computer.Move(RESET);
 			_ball.Move(RESET);
 			//wait for player input, then start the game
 			if (input == CHAR_P) {
@@ -40,6 +44,7 @@ void Game::Update(int input) {
 			break;
 		case RESET:
 			_player.Move(RESET);
+			_computer.Move(RESET);
 			_ball.Move(RESET);
 			_gameState = SERVE;
 			break;
@@ -63,6 +68,8 @@ void Game::Update(int input) {
 				default:
 					break;
 			}
+			// need a check to see if p2 is computer or player... for now, assume computer
+			_computer.Move(_ball.GetPosition().y);
 			// Ball logic
 			_ball.Move(NO_COLLISION);
 			CheckCollision();
@@ -93,19 +100,9 @@ void Game::CheckCollision() {
 		_gameState = RESET;
 		//scores
 	}
-	// lets start by simple collision with paddle - no matter what, just reversed horizontal direction
-	// will have to check left and right side of ball seperately? dont want ball to clip through paddle then turn around?
-	// maybe focus on half of circle
-
-	// player paddle:
-	// too complicated, lets make this a private function
 	if (PaddleCollision(ballPos)) {
 		_ball.Move(PADDLE_COLLISION);
 	}
-	// if (((ballPos.x <= _leftPaddle) && (ballPos.x + _ballSize/2 >= _leftPaddle))
-	// 	|| ((ballPos.x >= _rightPaddle) && (ballPos.x + _ballSize/2 <= _rightPaddle))) {
-	// 	_ball.Move(PADDLE_COLLISION);
-	// }
 }
 
 bool Game::PaddleCollision(sf::Vector2f ballPos) {

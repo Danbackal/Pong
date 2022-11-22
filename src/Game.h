@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "Player.h"
+#include "Computer.h"
 #include "Ball.h"
 #include "GameDef.h"
 
@@ -20,6 +21,7 @@ class Game {
 		int _leftPaddle;
 		int _rightPaddle;
 		// Computer _computer;
+		Computer _computer;
 		int _p1Score; // p1 is left, always a real player
 		int _p2Score;
 		// Ball
