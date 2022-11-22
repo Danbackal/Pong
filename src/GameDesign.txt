@@ -13,6 +13,8 @@ Need to add:
 	Paddle bounds:
 		Hitting the ball while moving should change the velocity.
 		This will stop the computer from always getting points or always losing points depending on the initial serve
+	TearDown:
+		get rid of the objects, break down the game.
 
 
 Game Class:
